@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="assets/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
   <body>
     <div class="container">
@@ -44,60 +44,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script type="text/javascript">
-    
-    var ogGifs = ["Surfing","Skateboarding","Snowboarding"];
-    
-    function renderButtons(){
-        $("#newButtons").empty();
-        for (let i = 0 ; i < ogGifs.length ; i++){
-            var bttn = $("<button>");
-            bttn.addClass("gif");
-            bttn.attr("data-name",ogGifs[i]);
-            bttn.text(ogGifs[i]);
-            $("#newButtons").append(bttn);
-        }
-    }
-        $("#addGif").on("click", function(event){
-            event.preventDefault();
-            var gif = $("#gifInput").val();
-            ogGifs.push(gif);
-            renderButtons();
-            $("#gifInput").val("");
-    });
-
-    renderButtons();
-    
-    $("#newButtons").on("click", ".gif", function() {
-        event.preventDefault()
-        $("#gifPropogator").empty()
-        var getGiphy = $(this).attr("data-name")
-        // var rating = $(this).attr("data-name")
-        var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=gWO40SIQa1EcWO2gcH3VGy9Yc2BFN7ni&q=" + getGiphy + "&limit=10&offset=0&rating=G&lang=en";
-        $.ajax({
-        url: queryURL,
-        method: "GET"
-        })
-        .then(function(response) {
-            for (let i = 0 ; i < response.data.length ; i++){
-                console.log(response.data[i].images.original.url)
-                $("#gifPropogator").append(`<img src = "${response.data[i].images.original_still.url}"
-                    data-still = "${response.data[i].images.original_still.url}"
-                    data-animate = "${response.data[i].images.original.url}"
-                    data-state = "still" height = "250px" width = "300px" class = "gif"> <figcaption width = "350px" > Rating : ${response.data[i].rating}</figcaption>`)
-            }
-            $(".gif").on("click", function() {
-            var state = $(this).attr("data-state");
-            if (state === "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-            } else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-            }
-            });
-        });
-    });
-    </script>
+    <script src="assets/js/java.js"></script>
     </body>
 </html>
